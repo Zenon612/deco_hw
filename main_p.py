@@ -4,7 +4,6 @@ from functools import wraps
 from typing import Callable
 
 
-
 def logger(path=None):
     """Параметризованный декоратор для логирования"""
 
@@ -12,7 +11,7 @@ def logger(path=None):
         @wraps(old_function)
         def wrapper(*args, **kwargs):
             if path is None:
-                default_dir = "log"
+                default_dir = "."
                 if not os.path.exists(default_dir):
                     os.makedirs(default_dir)
                 actual_log_path = os.path.join(default_dir, "main_p.log")
@@ -34,10 +33,10 @@ def logger(path=None):
             execute_time = end_time - start_time
 
             log_entry = f"""
-            Дата и время: {start_time.strftime('%Y-%m-%d %H:%M:%S')}
-            Имя функции: {old_function.__name__}
-            Аргументы: {args}, {kwargs}
-            Время выполнения: {execute_time}"""
+Дата и время: {start_time.strftime('%Y-%m-%d %H:%M:%S')}
+Имя функции: {old_function.__name__}
+Аргументы: {args}, {kwargs}
+Время выполнения: {execute_time}"""
 
             if exception_info:
                 log_entry += f"\nОшибка: {exception_info}\n"
