@@ -1,11 +1,19 @@
 import os
 import datetime
 from functools import wraps
-from typing import Callable
+from typing import Callable, Optional
 
 
-def logger(path=None):
-    """Параметризованный декоратор для логирования"""
+def logger(path: Optional[str] = None):
+    """
+    Параметризованный декоратор для логирования вызовов функций.
+
+    Позволяет указать путь к файлу лога. Если путь не указан, используется
+    файл main_p.log в текущей директории.
+
+    :param path: Путь к файлу лога (опционально)
+    :return: Декоратор для обёртывания функции
+    """
 
     def __logger(old_function: Callable):
         @wraps(old_function)
@@ -54,6 +62,7 @@ def logger(path=None):
 
 
 def test_2():
+    """Тест для параметризованного декоратора logger из main_p.py"""
     paths = ('log_1.log', 'log_2.log', 'log_3.log')
 
     for path in paths:
